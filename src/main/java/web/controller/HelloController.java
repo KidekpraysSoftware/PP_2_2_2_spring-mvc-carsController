@@ -24,7 +24,7 @@ public class HelloController {
 	}
 
 	@GetMapping(value = "/cars")
-	public String printHello(ModelMap model, @RequestParam(value = "count", required = false) String sCount) {
+	public String printHello(ModelMap model, @RequestParam(value = "count", defaultValue = "5") Integer сount) {
 
 		//Cars DataBase
 		List<Car> cars_DB = new ArrayList<>();
@@ -36,12 +36,7 @@ public class HelloController {
 
 
 		List<String> cars = new ArrayList<>();
-
-		int count = cars_DB.size();
-		if (sCount != null)  count = Integer.parseInt(sCount);
-		if (count>cars_DB.size()) { count = cars_DB.size();}
-
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i<5 && i < сount; i++) {
 			cars.add(cars_DB.get(i).toString());
 		}
 		model.addAttribute("cars", cars);
